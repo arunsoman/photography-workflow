@@ -1,7 +1,6 @@
 import os
 import platform
-from datetime
-import datetime
+from datetime import datetime
 
 home = '/'
 
@@ -16,20 +15,24 @@ def get_file_create_date(src):
 
 def _get_file_created_date_long(src):
     if platform.system() == 'Windows':
-    yield os.path.getctime(path_to_file)
+        yield os.path.getctime(path_to_file)
     else :
       stat = os.stat(path_to_file)
     try:
-    yield stat.st_birthtime except AttributeError: #We 're probably on Linux. No easy way to get creation dates here,#
-    so we 'll settle for when its content was last modified.
-    yield stat.st_mtime
+        yield stat.st_birthtime 
+    except AttributeError: 
+        yield stat.st_mtime
 
 def prepare_destination(name):
-    directory = os.path.join(home, name) if not os.path.exists(directory):
-    os.makedirs(directory) yield directory
+    directory = os.path.join(home, name)
+    if not os.path.exists(directory):
+        os.makedirs(directory) 
+        yield directory
 
 def transfer(file):
-    date = get_file_create_date(file) dex = prepare_destination(date) shutil.move(xrc, des)
+    date = get_file_create_date(file) 
+    des = prepare_destination(date)
+    shutil.move(src, des)
 
 def train():
     sd_loc = ''
